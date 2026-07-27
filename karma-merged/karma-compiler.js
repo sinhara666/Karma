@@ -165,12 +165,12 @@ while ((m = attrRe.exec(pageAttrs))) {
 
   // LAYOUT name from PAGE attr or <LAYOUT NAME="..."/>
   let layoutName = getAttr(pageAttrs, "LAYOUT") || getAttr(pageAttrs, "layout") || "";
-  const layoutTagRe = /<LAYOUT([^\/>]*)\/>/i;
+  const layoutTagRe = /<LAYOUT([^>]*?)\/>/i;
   const lm = body.match(layoutTagRe);
   if (!layoutName && lm) {
     layoutName = getAttr(lm[1] || "", "NAME") || getAttr(lm[1] || "", "name") || "";
   }
-  body = body.replace(/<LAYOUT([^\/>]*)\/>/gi, "");
+  body = body.replace(/<LAYOUT([^>]*?)\/>/gi, "");
 
   // Expand components
   for (const name in components) {
@@ -192,7 +192,7 @@ while ((m = attrRe.exec(pageAttrs))) {
 
   function applyKarmaBlocks(html) {
     // HEADING
-    html = html.replace(/<HEADING([^\/>]*)\/>/gi, (_, attrStr) => {
+    html = html.replace(/<HEADING([^>]*?)\/>/gi, (_, attrStr) => {
       const text = getAttr(attrStr, "TEXT") || getAttr(attrStr, "text");
       const level = clampInt(getAttr(attrStr, "LEVEL") || getAttr(attrStr, "level") || "2", 1, 6, 2);
       const size = getAttr(attrStr, "SIZE") || getAttr(attrStr, "size") || "";
@@ -206,7 +206,7 @@ while ((m = attrRe.exec(pageAttrs))) {
     });
 
     // PARA
-    html = html.replace(/<PARA([^\/>]*)\/>/gi, (_, attrStr) => {
+    html = html.replace(/<PARA([^>]*?)\/>/gi, (_, attrStr) => {
       const text = getAttr(attrStr, "TEXT") || getAttr(attrStr, "text");
       if (!text) {
         return `<div class="k-block k-paragraph"><p class="k-placeholder">Write your paragraph here…</p></div>`;
@@ -215,7 +215,7 @@ while ((m = attrRe.exec(pageAttrs))) {
     });
 
     // IMAGE
-    html = html.replace(/<IMAGE([^\/>]*)\/>/gi, (_, attrStr) => {
+    html = html.replace(/<IMAGE([^>]*?)\/>/gi, (_, attrStr) => {
       const src2 = getAttr(attrStr, "SRC") || getAttr(attrStr, "src");
       const alt = getAttr(attrStr, "ALT") || getAttr(attrStr, "alt");
       const title = getAttr(attrStr, "TITLE") || getAttr(attrStr, "title");
@@ -264,7 +264,7 @@ while ((m = attrRe.exec(pageAttrs))) {
     });
 
     // LINK
-    html = html.replace(/<LINK([^\/>]*)\/>/gi, (_, attrStr) => {
+    html = html.replace(/<LINK([^>]*?)\/>/gi, (_, attrStr) => {
       const text = getAttr(attrStr, "TEXT") || getAttr(attrStr, "text") || "Click here";
       const hrefRaw = getAttr(attrStr, "HREF") || getAttr(attrStr, "href") || "#";
       const variant = (getAttr(attrStr, "VARIANT") || getAttr(attrStr, "variant") || "primary").toLowerCase();
@@ -274,7 +274,7 @@ while ((m = attrRe.exec(pageAttrs))) {
     });
 
     // NAV
-    html = html.replace(/<NAV([^\/>]*)\/>/gi, (_, attrStr) => {
+    html = html.replace(/<NAV([^>]*?)\/>/gi, (_, attrStr) => {
       const variant = (getAttr(attrStr, "TYPE") || getAttr(attrStr, "variant") || "bar").toLowerCase();
       const position = (getAttr(attrStr, "POSITION") || getAttr(attrStr, "position") || "top").toLowerCase();
       const title = getAttr(attrStr, "TITLE") || getAttr(attrStr, "title");
@@ -299,7 +299,7 @@ while ((m = attrRe.exec(pageAttrs))) {
     });
 
     // TABLE
-    html = html.replace(/<TABLE([^\/>]*)\/>/gi, (_, attrStr) => {
+    html = html.replace(/<TABLE([^>]*?)\/>/gi, (_, attrStr) => {
       const title = getAttr(attrStr, "TITLE") || getAttr(attrStr, "title") || "Table";
       const cols = clampInt(getAttr(attrStr, "COLS") || getAttr(attrStr, "cols") || "3", 2, 6, 3);
       const rows = clampInt(getAttr(attrStr, "ROWS") || getAttr(attrStr, "rows") || "2", 2, 10, 2);
@@ -312,7 +312,7 @@ while ((m = attrRe.exec(pageAttrs))) {
     });
 
     // FORM
-    html = html.replace(/<FORM([^\/>]*)\/>/gi, (_, attrStr) => {
+    html = html.replace(/<FORM([^>]*?)\/>/gi, (_, attrStr) => {
       const title = getAttr(attrStr, "TITLE") || getAttr(attrStr, "title") || "Form";
       const fieldsRaw = getAttr(attrStr, "FIELDS") || getAttr(attrStr, "fields") || "name,email,message";
       const submitText = getAttr(attrStr, "SUBMIT") || getAttr(attrStr, "submit") || "Submit";
@@ -336,7 +336,7 @@ ${inputs}
     });
 
     // VIDEO
-    html = html.replace(/<VIDEO([^\/>]*)\/>/gi, (_, attrStr) => {
+    html = html.replace(/<VIDEO([^>]*?)\/>/gi, (_, attrStr) => {
       const src2 = getAttr(attrStr, "SRC") || getAttr(attrStr, "src");
       const url = getAttr(attrStr, "URL") || getAttr(attrStr, "url");
       const title = getAttr(attrStr, "TITLE") || getAttr(attrStr, "title") || "Video";
@@ -352,7 +352,7 @@ ${inputs}
     });
 
     // EMAIL
-    html = html.replace(/<EMAIL([^\/>]*)\/>/gi, (_, attrStr) => {
+    html = html.replace(/<EMAIL([^>]*?)\/>/gi, (_, attrStr) => {
       const to = getAttr(attrStr, "TO") || getAttr(attrStr, "to");
       const text = getAttr(attrStr, "TEXT") || getAttr(attrStr, "text") || "Email";
       const subject = getAttr(attrStr, "SUBJECT") || getAttr(attrStr, "subject");
@@ -369,7 +369,7 @@ ${inputs}
     });
 
     // PHONE
-    html = html.replace(/<PHONE([^\/>]*)\/>/gi, (_, attrStr) => {
+    html = html.replace(/<PHONE([^>]*?)\/>/gi, (_, attrStr) => {
       const number = getAttr(attrStr, "NUMBER") || getAttr(attrStr, "number");
       const text = getAttr(attrStr, "TEXT") || getAttr(attrStr, "text") || "Call";
       if (!number) return `<div class="k-block k-link"><span class="k-muted">Add NUMBER="+1206..."</span></div>`;
@@ -379,29 +379,29 @@ ${inputs}
     });
 
     // SECTION - Flexible container with optional background
-    html = html.replace(/<SECTION([^\/>]*)\/>/gi, (_, attrStr) => {
+    html = html.replace(/<SECTION([^>]*)>([\s\S]*?)<\/SECTION>/gi, (_, attrStr, inner) => {
       const title = getAttr(attrStr, "TITLE") || getAttr(attrStr, "title");
       const bg = (getAttr(attrStr, "BG") || getAttr(attrStr, "bg") || "default").toLowerCase();
       const padding = getAttr(attrStr, "PADDING") || getAttr(attrStr, "padding") || "16px";
-      
+
       const bgClass = bg === "dark" ? "k-section-dark" : bg === "light" ? "k-section-light" : "";
       const head = title ? `<div class="k-block-title">${escapeHTML(title)}</div>` : "";
-      
+
       return `<section class="k-section ${bgClass}" style="padding:${escapeHTML(padding)}">
-    ${head}<slot/>
+    ${head}${inner}
   </section>`;
     });
 
     // GRID - Multi-column layout
-    html = html.replace(/<GRID([^\/>]*)\/>/gi, (_, attrStr) => {
+    html = html.replace(/<GRID([^>]*)>([\s\S]*?)<\/GRID>/gi, (_, attrStr, inner) => {
       const cols = clampInt(getAttr(attrStr, "COLS") || getAttr(attrStr, "cols") || "2", 1, 4, 2);
       const gap = getAttr(attrStr, "GAP") || getAttr(attrStr, "gap") || "14px";
-      
-      return `<div class="k-grid k-grid-${cols}" style="gap:${escapeHTML(gap)}"><slot/></div>`;
+
+      return `<div class="k-grid k-grid-${cols}" style="gap:${escapeHTML(gap)}">${inner}</div>`;
     });
 
     // BADGE - Small info labels
-    html = html.replace(/<BADGE([^\/>]*)\/>/gi, (_, attrStr) => {
+    html = html.replace(/<BADGE([^>]*?)\/>/gi, (_, attrStr) => {
       const text = getAttr(attrStr, "TEXT") || getAttr(attrStr, "text") || "Badge";
       const type = (getAttr(attrStr, "TYPE") || getAttr(attrStr, "type") || "default").toLowerCase();
       
@@ -409,7 +409,7 @@ ${inputs}
     });
 
     // TAGS - Display multiple tags
-    html = html.replace(/<TAGS([^\/>]*)\/>/gi, (_, attrStr) => {
+    html = html.replace(/<TAGS([^>]*?)\/>/gi, (_, attrStr) => {
       const tagsRaw = getAttr(attrStr, "LIST") || getAttr(attrStr, "list") || "tag1,tag2,tag3";
       const tags = tagsRaw.split(",").map(t => t.trim()).filter(Boolean);
       
@@ -418,7 +418,7 @@ ${inputs}
     });
 
     // ALERT - Highlighted callout messages
-    html = html.replace(/<ALERT([^\/>]*)\/>/gi, (_, attrStr) => {
+    html = html.replace(/<ALERT([^>]*?)\/>/gi, (_, attrStr) => {
       const text = getAttr(attrStr, "TEXT") || getAttr(attrStr, "text");
       const type = (getAttr(attrStr, "TYPE") || getAttr(attrStr, "type") || "info").toLowerCase();
       
@@ -438,7 +438,7 @@ ${inputs}
     });
 
     // CODE - Display code snippets
-    html = html.replace(/<CODE([^\/>]*)\/>/gi, (_, attrStr) => {
+    html = html.replace(/<CODE([^>]*?)\/>/gi, (_, attrStr) => {
       const code = getAttr(attrStr, "TEXT") || getAttr(attrStr, "text");
       const lang = getAttr(attrStr, "LANG") || getAttr(attrStr, "lang") || "plaintext";
       const title = getAttr(attrStr, "TITLE") || getAttr(attrStr, "title");
@@ -454,31 +454,32 @@ ${inputs}
     });
 
     // COLLAPSE - Expandable sections
-    html = html.replace(/<COLLAPSE([^\/>]*)\/>/gi, (_, attrStr) => {
+    html = html.replace(/<COLLAPSE([^>]*)>([\s\S]*?)<\/COLLAPSE>/gi, (_, attrStr, inner) => {
       const title = getAttr(attrStr, "TITLE") || getAttr(attrStr, "title") || "Expand";
       const open = getAttr(attrStr, "OPEN") || getAttr(attrStr, "open");
       const isOpen = open && (open.toLowerCase() === "true" || open === "1");
-      
+
       return `<details class="k-collapse" ${isOpen ? "open" : ""}>
     <summary class="k-collapse-title">${escapeHTML(title)}</summary>
-    <div class="k-collapse-content"><slot/></div>
+    <div class="k-collapse-content">${inner}</div>
   </details>`;
     });
 
     // TIMELINE - Chronological event display
-    html = html.replace(/<TIMELINE([^\/>]*)\/>/gi, (_, attrStr) => {
+    // Negative lookahead (?!-ITEM) so this never swallows <TIMELINE-ITEM> tags
+    html = html.replace(/<TIMELINE(?!-ITEM)([^>]*)>([\s\S]*?)<\/TIMELINE>/gi, (_, attrStr, inner) => {
       const title = getAttr(attrStr, "TITLE") || getAttr(attrStr, "title");
-      
+
       const head = title ? `<div class="k-block-title">${escapeHTML(title)}</div>` : "";
-      
+
       return `<div class="k-block k-timeline">
     ${head}
-    <div class="k-timeline-items"><slot/></div>
+    <div class="k-timeline-items">${inner}</div>
   </div>`;
     });
 
     // TIMELINE-ITEM - Individual timeline entries
-    html = html.replace(/<TIMELINE-ITEM([^\/>]*)\/>/gi, (_, attrStr) => {
+    html = html.replace(/<TIMELINE-ITEM([^>]*?)\/>/gi, (_, attrStr) => {
       const date = getAttr(attrStr, "DATE") || getAttr(attrStr, "date");
       const title = getAttr(attrStr, "TITLE") || getAttr(attrStr, "title");
       const text = getAttr(attrStr, "TEXT") || getAttr(attrStr, "text");
@@ -494,7 +495,7 @@ ${inputs}
     });
 
     // STAT - Dashboard stat boxes
-    html = html.replace(/<STAT([^\/>]*)\/>/gi, (_, attrStr) => {
+    html = html.replace(/<STAT([^>]*?)\/>/gi, (_, attrStr) => {
       const value = getAttr(attrStr, "VALUE") || getAttr(attrStr, "value");
       const label = getAttr(attrStr, "LABEL") || getAttr(attrStr, "label");
       const icon = getAttr(attrStr, "ICON") || getAttr(attrStr, "icon");
@@ -509,7 +510,7 @@ ${inputs}
     });
 
     // QUOTE - Blockquotes with author
-    html = html.replace(/<QUOTE([^\/>]*)\/>/gi, (_, attrStr) => {
+    html = html.replace(/<QUOTE([^>]*?)\/>/gi, (_, attrStr) => {
       const text = getAttr(attrStr, "TEXT") || getAttr(attrStr, "text");
       const author = getAttr(attrStr, "AUTHOR") || getAttr(attrStr, "author");
       const role = getAttr(attrStr, "ROLE") || getAttr(attrStr, "role");
@@ -529,7 +530,7 @@ ${inputs}
     });
 
     // PROGRESS - Progress bars
-    html = html.replace(/<PROGRESS([^\/>]*)\/>/gi, (_, attrStr) => {
+    html = html.replace(/<PROGRESS([^>]*?)\/>/gi, (_, attrStr) => {
       const value = clampInt(getAttr(attrStr, "VALUE") || getAttr(attrStr, "value") || "50", 0, 100, 50);
       const label = getAttr(attrStr, "LABEL") || getAttr(attrStr, "label") || `${value}%`;
       const color = getAttr(attrStr, "COLOR") || getAttr(attrStr, "color") || "blue";

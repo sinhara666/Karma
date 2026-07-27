@@ -192,7 +192,7 @@ class KarmaValidator {
   // Check required attributes
   checkRequiredAttributes() {
     for (const [tagName, attrs] of Object.entries(VALID_TAGS)) {
-      const pattern = new RegExp(`<${tagName}([^>]*)\\s*/?\\s*>`, "gi");
+      const pattern = new RegExp(`<${tagName}(?![A-Z-])([^>]*)\\s*/?\\s*>`, "gi");
       let match;
 
       while ((match = pattern.exec(this.content))) {
@@ -313,7 +313,7 @@ class KarmaValidator {
     const selfClosing = [
       "PARA", "IMAGE", "VIDEO", "LINK", "NAV", "TABLE", "FORM", 
       "EMAIL", "PHONE", "BADGE", "TAGS", "ALERT", "CODE", 
-      "STAT", "PROGRESS", "QUOTE", "COLLAPSE"
+      "STAT", "PROGRESS", "QUOTE"
     ];
     return selfClosing.includes(tag);
   }
