@@ -285,7 +285,9 @@ while ((m = attrRe.exec(pageAttrs))) {
         .map(s => s.trim())
         .filter(Boolean)
         .map(pair => {
-          const [label, hrefRaw] = pair.split(":").map(x => (x || "").trim());
+          const colonIdx = pair.indexOf(":");
+          const label = (colonIdx === -1 ? pair : pair.slice(0, colonIdx)).trim();
+          const hrefRaw = (colonIdx === -1 ? "" : pair.slice(colonIdx + 1)).trim();
           const href = karmaToHtmlHref(hrefRaw || "#");
           return { label: label || "Link", href };
         });
