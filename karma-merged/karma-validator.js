@@ -313,7 +313,7 @@ class KarmaValidator {
     const selfClosing = [
       "PARA", "IMAGE", "VIDEO", "LINK", "NAV", "TABLE", "FORM", 
       "EMAIL", "PHONE", "BADGE", "TAGS", "ALERT", "CODE", 
-      "STAT", "PROGRESS", "QUOTE"
+      "STAT", "PROGRESS", "QUOTE", "HEADING", "TIMELINE-ITEM"
     ];
     return selfClosing.includes(tag);
   }
