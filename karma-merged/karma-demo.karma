@@ -1,0 +1,41 @@
+<PAGE TITLE="Karma — Calm Websites" BRAND="Karma" TAGLINE="Simple by default. Powerful only when needed.">
+  <NAV LINKS="Docs:#docs, Examples:#examples, GitHub:https://github.com/sinhara666/Karma" TITLE="Karma" />
+
+  <SECTION BG="dark" PADDING="48px">
+    <HEADING TEXT="Websites without the headache" LEVEL="1" SIZE="large" />
+    <PARA TEXT="Karma is a small, readable language for building page-based websites. No frameworks. No config files. No boilerplate fatigue. Write calm code, ship a clean page, move on." />
+    <LINK TEXT="Get started" HREF="https://github.com/sinhara666/Karma" />
+  </SECTION>
+
+  <SECTION TITLE="Why Karma exists">
+    <GRID>
+      <STAT VALUE="0" LABEL="Config files needed" ICON="🧘" />
+      <STAT VALUE="22" LABEL="Tags to learn. That's it" ICON="📖" />
+      <STAT VALUE="100%" LABEL="Readable next month" ICON="🔍" />
+    </GRID>
+    <QUOTE TEXT="Modern web tooling adds complexity faster than it adds value. Karma takes the opposite approach." />
+  </SECTION>
+
+  <SECTION TITLE="Write this" BG="light">
+    <CODE TEXT="&lt;PAGE TITLE=&quot;My Site&quot;&gt;&#10;  &lt;HEADING TEXT=&quot;Hello&quot; LEVEL=&quot;1&quot; /&gt;&#10;  &lt;PARA TEXT=&quot;That's the whole page.&quot; /&gt;&#10;&lt;/PAGE&gt;" />
+    <PARA TEXT="Three tags. One file. The compiler handles the rest — semantic HTML, built-in styling, responsive layout." />
+  </SECTION>
+
+  <SECTION TITLE="Made for ADHD brains">
+    <PARA TEXT="Fewer decisions. Fewer dependencies. Predictable, file-based, boring on purpose. Karma reduces mental load so you can spend your energy on what you're actually building." />
+    <TAGS VALUES="no-framework, beginner-friendly, file-based, calm-by-design" />
+  </SECTION>
+
+  <SECTION TITLE="Roadmap" BG="dark">
+    <TIMELINE>
+      <TIMELINE-ITEM TITLE="v1.0 — Stable core" TEXT="Page-based sites, 22 tags, CLI, offline mode. Shipped." />
+      <TIMELINE-ITEM TITLE="v1.1 — Layouts" TEXT="Reusable layout templates for multi-page sites." />
+      <TIMELINE-ITEM TITLE="Next — Your idea" TEXT="Karma grows only when builders ask for it. Nothing bloated, ever." />
+    </TIMELINE>
+  </SECTION>
+
+  <SECTION TITLE="Try it">
+    <PARA TEXT="Free and MIT licensed. Clone it, write a .karma file, run the compiler." />
+    <FORM TITLE="Get launch updates" FIELDS="name, email" SUBMIT="Notify me" />
+  </SECTION>
+</PAGE>
