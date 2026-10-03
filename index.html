@@ -1,0 +1,171 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Karma — Watch What It Makes</title><style>
+:root{--k-bg:#0b0f14;--k-card:rgba(17,24,39,.55);--k-border:rgba(255,255,255,.12);--k-text:#e5e7eb;--k-muted:rgba(229,231,235,.72);--k-radius:16px;}
+*{box-sizing:border-box}
+body{margin:0;padding:28px;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--k-bg);color:var(--k-text);}
+.k-block{border:1px solid var(--k-border);background:var(--k-card);border-radius:var(--k-radius);padding:16px;margin:14px 0;}
+.k-block-title{font-weight:900;margin-bottom:10px}
+.k-placeholder{color:var(--k-muted);margin:0}
+.k-muted{color:var(--k-muted)}
+.k-small{font-size:.9rem}
+.k-btn{display:inline-flex;align-items:center;justify-content:center;padding:10px 14px;border-radius:12px;border:1px solid var(--k-border);text-decoration:none;font-weight:900;background:rgba(255,255,255,.08);color:var(--k-text);cursor:pointer}
+.k-btn-primary{background:rgba(255,255,255,.12)}
+.k-btn-ghost{background:transparent}
+.k-nav-inner{display:flex;gap:10px;flex-wrap:wrap}
+.k-nav-link{padding:9px 12px;border-radius:999px;border:1px solid var(--k-border);background:rgba(255,255,255,.06);text-decoration:none}
+.k-image-placeholder{display:flex;gap:12px;align-items:center;padding:18px;border:1px dashed var(--k-border);border-radius:14px}
+.k-image-icon{font-size:22px}
+.k-figure{margin:0}
+.k-img{max-width:100%;height:auto;border-radius:14px;border:1px solid var(--k-border)}
+.k-caption{margin-top:8px;color:var(--k-muted);font-size:.95rem}
+.k-hero{position:relative;border-radius:20px;overflow:hidden;border:1px solid var(--k-border);margin:14px 0;}
+.k-hero-img{width:100%;height:320px;object-fit:cover;display:block}
+.k-hero-overlay{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:18px;background:linear-gradient(transparent, rgba(0,0,0,.65));}
+.k-split{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:center}
+@media (max-width:820px){.k-split{grid-template-columns:1fr}}
+.k-table-el{width:100%;border-collapse:collapse;overflow:hidden;border-radius:12px}
+.k-table-el th,.k-table-el td{border-bottom:1px solid var(--k-border);padding:10px;text-align:left}
+.k-form-inner{display:grid;gap:10px}
+.k-label{font-weight:900}
+.k-input{width:100%;padding:10px 12px;border-radius:12px;border:1px solid var(--k-border);background:rgba(255,255,255,.04);color:var(--k-text);outline:none}
+.k-input::placeholder{color:rgba(229,231,235,.45)}
+textarea.k-input{min-height:110px;resize:vertical}
+.k-video-el{width:100%;border-radius:14px;border:1px solid var(--k-border)}
+.k-iframe-wrap{position:relative;padding-top:56.25%;border-radius:14px;overflow:hidden;border:1px solid var(--k-border)}
+.k-iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.k-pro-notice{border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);border-radius:14px;padding:12px 14px;margin:14px 0;}
+.k-pro-notice strong{font-weight:900}
+.k-heading{margin:16px 0 10px 0;font-weight:900}
+.k-heading-1{font-size:2.4rem}
+.k-heading-2{font-size:1.8rem}
+.k-heading-3{font-size:1.4rem}
+.k-heading-4{font-size:1.1rem}
+.k-heading-large{font-size:3rem}
+.k-section{border:1px solid var(--k-border);border-radius:var(--k-radius);margin:14px 0;}
+.k-section-dark{background:rgba(0,0,0,.3)}
+.k-section-light{background:rgba(255,255,255,.06)}
+.k-grid{display:grid}
+.k-grid-1{grid-template-columns:1fr}
+.k-grid-2{grid-template-columns:repeat(2,1fr)}
+.k-grid-3{grid-template-columns:repeat(3,1fr)}
+.k-grid-4{grid-template-columns:repeat(4,1fr)}
+@media (max-width:768px){.k-grid-3,.k-grid-4{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.k-grid-2,.k-grid-3,.k-grid-4{grid-template-columns:1fr}}
+.k-badge{display:inline-block;padding:4px 8px;border-radius:12px;font-size:.85rem;font-weight:900;background:rgba(255,255,255,.12);color:var(--k-text);margin-right:6px}
+.k-badge-success{background:rgba(34,197,94,.4);color:#22c55e}
+.k-badge-warning{background:rgba(234,179,8,.4);color:#eab308}
+.k-badge-error{background:rgba(239,68,68,.4);color:#ef4444}
+.k-tags{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0;}
+.k-tag{padding:6px 10px;background:rgba(255,255,255,.08);border-radius:6px;font-size:.9rem}
+.k-alert{display:flex;gap:10px;align-items:flex-start;padding:12px;border-radius:12px;margin:14px 0;border-left:4px solid}
+.k-alert-info{background:rgba(59,130,246,.15);border-left-color:#3b82f6}
+.k-alert-success{background:rgba(34,197,94,.15);border-left-color:#22c55e}
+.k-alert-warning{background:rgba(234,179,8,.15);border-left-color:#eab308}
+.k-alert-error{background:rgba(239,68,68,.15);border-left-color:#ef4444}
+.k-alert-icon{font-size:1.2rem}
+.k-alert-text{flex:1}
+.k-code-block{background:rgba(0,0,0,.4);padding:0;margin:14px 0;}
+.k-code{margin:0;overflow-x:auto;font-family:'Courier New',monospace;font-size:.85rem;padding:16px;background:rgba(0,0,0,.6);border-radius:8px}
+.k-code code{color:var(--k-text)}
+.k-collapse{border:1px solid var(--k-border);border-radius:var(--k-radius);margin:14px 0;background:var(--k-card)}
+.k-collapse-title{padding:12px 16px;cursor:pointer;font-weight:900;user-select:none}
+.k-collapse-title:hover{background:rgba(255,255,255,.06)}
+.k-collapse-content{padding:16px;border-top:1px solid var(--k-border)}
+.k-timeline{position:relative;padding:20px 0}
+.k-timeline-items{border-left:2px solid var(--k-border);padding-left:20px}
+.k-timeline-item{position:relative;margin-bottom:24px}
+.k-timeline-dot{position:absolute;width:12px;height:12px;background:#3b82f6;border-radius:50%;left:-26px;top:4px}
+.k-timeline-date{font-size:.85rem;color:var(--k-muted);margin-bottom:4px}
+.k-timeline-item-title{font-weight:900;margin-bottom:4px}
+.k-stat{text-align:center;padding:16px}
+.k-stat-icon{font-size:2rem;margin-bottom:8px}
+.k-stat-value{font-size:2.2rem;font-weight:900;color:#3b82f6}
+.k-stat-label{font-size:.9rem;color:var(--k-muted);margin-top:4px}
+.k-quote{border-left:4px solid #3b82f6;padding:16px 20px;background:rgba(59,130,246,.1);border-radius:8px;margin:16px 0;font-style:italic}
+.k-quote-text{margin:0;font-size:1.1rem}
+.k-quote-footer{margin-top:12px;font-style:normal;font-size:.9rem;color:var(--k-muted)}
+.k-quote-role{display:block;margin-top:4px;font-size:.85rem}
+.k-progress-block{margin:16px 0}
+.k-progress-label{font-size:.9rem;margin-bottom:6px;font-weight:900}
+.k-progress{width:100%;height:8px;background:rgba(255,255,255,.1);border-radius:4px;overflow:hidden}
+.k-progress-bar{height:100%;background:rgba(59,130,246,.6);transition:width 0.3s}
+.k-progress-blue{background:rgba(59,130,246,.6)}
+.k-progress-green{background:rgba(34,197,94,.6)}
+.k-progress-red{background:rgba(239,68,68,.6)}
+</style></head>
+<body>
+  <div class="k-block k-nav k-nav-bar k-pos-top"><div class="k-block-title">Karma</div><nav class="k-nav-inner"><a class="k-nav-link" href="index.html">Home</a><a class="k-nav-link" href="how.html">How it works</a><a class="k-nav-link" href="try.html">Try it</a></nav></div>
+
+  <section class="k-section k-section-dark" style="padding:64px">
+    
+    <h1 class="k-heading k-heading-1 k-heading-large">This entire site is three Karma files</h1>
+    <div class="k-block k-paragraph"><p>No frameworks. No config files. No build pipeline. Three calm files, one command, three linked pages. The nav above connects them automatically.</p></div>
+    <div class="k-block k-link"><a class="k-btn k-btn-primary" href="how.html">See how it's made</a></div>
+  
+  </section>
+
+  <section class="k-section k-section-light" style="padding:16px">
+    <div class="k-block-title">The proof</div>
+    <div class="k-grid k-grid-2" style="gap:14px">
+      <div class="k-stat">
+    <div class="k-stat-icon">📄</div>
+    <div class="k-stat-value">3</div>
+    <div class="k-stat-label">Files written</div>
+  </div>
+      <div class="k-stat">
+    <div class="k-stat-icon">⚡</div>
+    <div class="k-stat-value">1</div>
+    <div class="k-stat-label">Command run</div>
+  </div>
+      <div class="k-stat">
+    <div class="k-stat-icon">🎉</div>
+    <div class="k-stat-value">0</div>
+    <div class="k-stat-label">Dependencies installed</div>
+  </div>
+    </div>
+    <blockquote class="k-quote">
+    <p class="k-quote-text">"Modern web tooling adds complexity faster than it adds value. Karma takes the opposite approach."</p>
+    <footer class="k-quote-footer">
+      
+      
+    </footer>
+  </blockquote>
+  
+  </section>
+
+  <section class="k-section " style="padding:16px">
+    <div class="k-block-title">Three pages, one command</div>
+    <div class="k-block k-timeline">
+    
+    <div class="k-timeline-items">
+      <div class="k-timeline-item">
+    <div class="k-timeline-dot"></div>
+    <div class="k-timeline-content">
+      <div class="k-timeline-date"></div>
+      <div class="k-timeline-item-title">index.karma</div>
+      <p>This page. Hero, stats, timeline.</p>
+    </div>
+  </div>
+      <div class="k-timeline-item">
+    <div class="k-timeline-dot"></div>
+    <div class="k-timeline-content">
+      <div class="k-timeline-date"></div>
+      <div class="k-timeline-item-title">how.karma</div>
+      <p>How it works, with a code sample.</p>
+    </div>
+  </div>
+      <div class="k-timeline-item">
+    <div class="k-timeline-dot"></div>
+    <div class="k-timeline-content">
+      <div class="k-timeline-date"></div>
+      <div class="k-timeline-item-title">try.karma</div>
+      <p>Signup form and GitHub link.</p>
+    </div>
+  </div>
+    </div>
+  </div>
+    <div class="k-block k-link"><a class="k-btn k-btn-primary" href="how.html">How it works</a></div>
+  
+  </section>
+</body></html>
